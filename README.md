@@ -1,3 +1,15 @@
+# About
+
+> A minimalist clone of Figma, designed to help you create beautiful user interfaces without the clutter.
+
+**Features:**
+
+- A clean and intuitive interface
+- All the essential tools for UI design
+- Lightweight and fast
+- Free to use
+- Try it today and see how easy it is to create stunning designs.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
