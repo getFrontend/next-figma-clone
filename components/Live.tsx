@@ -1,9 +1,10 @@
 import { useMyPresence, useOthers } from "@/liveblocks.config";
 import LiveCursors from "./cursor/LiveCursors";
-import { CursorMode } from "@/types/type";
+import { CursorMode, Reaction } from "@/types/type";
 import { useCallback, useEffect, useState } from "react";
 import ScreenFitText from "./ScreenFitText";
 import CursorChat from "./cursor/CursorChat";
+import ReactionSelector from "./reaction/ReactionButton";
 
 const Live = () => {
   // useOthers returns the list of other users in the room.
@@ -13,6 +14,8 @@ const Live = () => {
   const [cursorState, setCursorState] = useState({
     mode: CursorMode.Hidden
   });
+
+  const [reactions, setReactions] = useState<Reaction[]>([]);
 
   // Listen to keyboard events to change the cursor state
   useEffect(() => {
@@ -50,12 +53,13 @@ const Live = () => {
   const handlePointerMove = useCallback((event: React.PointerEvent) => {
     event.preventDefault();
 
-    // get the cursor position in the canvas
-    const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
-    const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
-
-    // broadcast the cursor position to other users
-    updateMyPresence({ cursor: { x, y } });
+    if (cursor == null || cursorState.mode !== CursorMode.ReactionSelector) {
+      // get the cursor position in the canvas
+      const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
+      const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
+      // broadcast the cursor position to other users
+      updateMyPresence({ cursor: { x, y } });
+    };
   }, []);
 
   // Hide the cursor when the mouse leaves the canvas
@@ -70,11 +74,21 @@ const Live = () => {
     });
   }, []);
 
+  const handlePointerUp = () => {
+
+  }
+
   const handlePointerDown = useCallback((event: React.PointerEvent) => {
     const x = event.clientX - event.currentTarget.getBoundingClientRect().x;
     const y = event.clientY - event.currentTarget.getBoundingClientRect().y;
 
     updateMyPresence({ cursor: { x, y } });
+
+    setCursorState((state: CursorState) => {
+      cursorState.mode === CursorMode.Reaction ?
+        { ...state, isPressed: true } :
+        state
+    });
   }, []);
 
   return (
@@ -94,6 +108,15 @@ const Live = () => {
           cursorState={cursorState}
           setCursorState={setCursorState}
           updateMyPresence={updateMyPresence}
+        />
+      )}
+
+      {cursorState.mode === CursorMode.ReactionSelector && (
+        <ReactionSelector
+          setReaction={(reaction) => {
+            setReactions(reaction);
+          }}
+
         />
       )}
 
