@@ -2,13 +2,16 @@ import { useBroadcastEvent, useEventListener, useMyPresence, useOthers } from "@
 import LiveCursors from "./cursor/LiveCursors";
 import { CursorMode, CursorState, Reaction, ReactionEvent } from "@/types/type";
 import { useCallback, useEffect, useState } from "react";
-import ScreenFitText from "./ScreenFitText";
 import CursorChat from "./cursor/CursorChat";
 import ReactionSelector from "./reaction/ReactionButton";
 import FlyingReaction from "./reaction/FlyingReaction";
 import useInterval from "@/hooks/useInterval";
 
-const Live = () => {
+type Props = {
+  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+};
+
+const Live = ({ canvasRef }: Props) => {
   // useOthers returns the list of other users in the room.
   const others = useOthers();
 
@@ -164,14 +167,15 @@ const Live = () => {
   }, []);
 
   return (
-    <div className="z-10 w-full h-[100vh] flex justify-center items-center text-center"
+    <div
+      id="canvas"
+      className="z-10 w-full h-[100vh] flex justify-center items-center text-center"
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
     >
-      <h1 className="sr-only text-white">Figman - a minimalist clone of Figma</h1>
-      <ScreenFitText />
+      <canvas ref={canvasRef} />
 
       {reactions.map((reaction) => (
         <FlyingReaction
