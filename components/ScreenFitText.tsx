@@ -48,7 +48,7 @@ const ScreenFitText = () => {
       ref={containerRef}
     >
       <span
-        className="absolute bottom-0 left-0 mx-auto whitespace-nowrap text-center font-bold uppercase text-slate-700 pointer-events-none"
+        className="absolute bottom-0 left-0 mx-auto whitespace-nowrap text-center font-bold uppercase text-slate-700 opacity-10 pointer-events-none"
         ref={textRef}
       >
         FIGMAN CREATE & SHARE
