@@ -4,7 +4,7 @@ const nextConfig = {
     config.externals.push({
       "utf-8-validate": "commonjs utf-8-validate",
       bufferutil: "commonjs bufferutil",
-      canvas: "commonjs canvas",
+      canvas: "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.2.1.tgz"
     });
     return config;
   },
