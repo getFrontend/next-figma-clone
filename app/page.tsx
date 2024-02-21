@@ -81,7 +81,7 @@ export default function Page() {
   const shapeRef = useRef<fabric.Object | null>(null);
 
   // selectedShapeRef is a reference to the shape that the user has selected.
-  const selectedShapeRef = useRef<string | null>("null");
+  const selectedShapeRef = useRef<string | null>(null);
 
   const activeObjectRef = useRef<fabric.Object | null>(null);
 
