@@ -7,7 +7,7 @@ import RightSidebar from "@/components/RightSidebar";
 import ScreenFitText from "@/components/ScreenFitText";
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
-import { handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasMouseMove, handleResize, initializeFabric, renderCanvas, handleCanvasObjectModified, handleCanvasSelectionCreated, handleCanvasObjectScaling } from "@/lib/canvas";
+import { handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasMouseMove, handleResize, initializeFabric, renderCanvas, handleCanvasObjectModified, handleCanvasSelectionCreated, handleCanvasObjectScaling, handlePathCreated } from "@/lib/canvas";
 import { ActiveElement, Attributes } from "@/types/type";
 import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
 import { defaultNavElement } from "@/constants";
@@ -214,6 +214,13 @@ export default function Page() {
       });
     });
 
+    canvas.on("path:created", (options) => {
+      handlePathCreated({
+        options,
+        syncShapeInStorage,
+      });
+    });
+
     window.addEventListener("resize", () => {
       handleResize({
         canvas: fabricRef.current,
@@ -265,7 +272,11 @@ export default function Page() {
       <section className="flex flex-row h-full">
         <h1 className="sr-only text-white">Figman - a minimalist clone of Figma</h1>
         <LeftSidebar allShapes={Array.from(canvasObjects)} />
-        <Live canvasRef={canvasRef} />
+        <Live
+          canvasRef={canvasRef}
+          undo={undo}
+          redo={redo}
+        />
         <RightSidebar
           elementAttributes={elementAttributes}
           setElementAttributes={setElementAttributes}

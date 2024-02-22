@@ -10,21 +10,21 @@ export enum CursorMode {
 
 export type CursorState =
   | {
-      mode: CursorMode.Hidden;
-    }
+    mode: CursorMode.Hidden;
+  }
   | {
-      mode: CursorMode.Chat;
-      message: string;
-      previousMessage: string | null;
-    }
+    mode: CursorMode.Chat;
+    message: string;
+    previousMessage: string | null;
+  }
   | {
-      mode: CursorMode.ReactionSelector;
-    }
+    mode: CursorMode.ReactionSelector;
+  }
   | {
-      mode: CursorMode.Reaction;
-      reaction: string;
-      isPressed: boolean;
-    };
+    mode: CursorMode.Reaction;
+    reaction: string;
+    isPressed: boolean;
+  };
 
 export type Reaction = {
   value: string;
@@ -116,12 +116,6 @@ export type ShapesMenuProps = {
   handleActiveElement: any;
   handleImageUpload: any;
   imageInputRef: any;
-};
-
-export type Presence = any;
-
-export type LiveCursorProps = {
-  others: readonly User<Presence, BaseUserMeta>[];
 };
 
 export type CanvasMouseDown = {
