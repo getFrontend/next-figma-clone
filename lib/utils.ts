@@ -1,6 +1,7 @@
 import jsPDF from "jspdf";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { v4 as uuid4 } from "uuid";
 
 const adjectives = [
   "Happy",
@@ -117,5 +118,5 @@ export const exportToPdf = () => {
   doc.addImage(data, "PNG", 0, 0, canvas.width, canvas.height);
 
   // download the pdf
-  doc.save("canvas.pdf");
+  doc.save(`figman-${uuid4().slice(1, 10)}.pdf`);
 };
