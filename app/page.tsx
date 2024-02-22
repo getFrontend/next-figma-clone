@@ -127,6 +127,13 @@ export default function Page() {
         }
         break;
 
+      case "comments":
+        break;
+
+      default:
+        // set the selected shape to the selected element
+        selectedShapeRef.current = elem?.value as string;
+        break;
     }
 
     selectedShapeRef.current = elem?.value as string;
