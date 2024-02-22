@@ -1,7 +1,7 @@
-import { useBroadcastEvent, useEventListener, useMyPresence, useOthers } from "@/liveblocks.config";
+import { useCallback, useEffect, useState } from "react";
+import { useBroadcastEvent, useEventListener, useMyPresence } from "@/liveblocks.config";
 import LiveCursors from "./cursor/LiveCursors";
 import { CursorMode, CursorState, Reaction } from "@/types/type";
-import { useCallback, useEffect, useState } from "react";
 import CursorChat from "./cursor/CursorChat";
 import ReactionSelector from "./reaction/ReactionButton";
 import FlyingReaction from "./reaction/FlyingReaction";
