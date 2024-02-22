@@ -1,15 +1,28 @@
 "use client";
 
-import { LeftSidebar, Live, Navbar, RightSidebar } from "@/components/index";
-import ScreenFitText from "@/components/ScreenFitText";
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
-import { handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasMouseMove, handleResize, initializeFabric, renderCanvas, handleCanvasObjectModified, handleCanvasSelectionCreated, handleCanvasObjectScaling, handlePathCreated } from "@/lib/canvas";
-import { ActiveElement, Attributes } from "@/types/type";
-import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
+import { LeftSidebar, Live, Navbar, RightSidebar } from "@/components/index";
+import ScreenFitText from "@/components/ScreenFitText";
+import {
+  handleCanvasMouseDown,
+  handleCanvasMouseUp,
+  handleCanvasMouseMove,
+  handleResize,
+  handleCanvasObjectModified,
+  handleCanvasSelectionCreated,
+  handleCanvasObjectScaling,
+  handlePathCreated,
+  initializeFabric,
+  renderCanvas,
+  handleCanvasObjectMoving,
+  handleCanvasZoom,
+} from "@/lib/canvas";
 import { defaultNavElement } from "@/constants";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
 import { handleImageUpload } from "@/lib/shapes";
+import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
+import { ActiveElement, Attributes } from "@/types/type";
 
 const Home = () => {
   // useUndo and useRedo are hooks provided by Liveblocks that allow you to undo and redo mutations.
@@ -65,8 +78,8 @@ const Home = () => {
     fontSize: "",
     fontFamily: "",
     fontWeight: "",
-    fill: "aabbcc",
-    stroke: "aabbcc"
+    fill: "#aabbcc",
+    stroke: "#aabbcc",
   });
 
   // canvasRef is a reference to the canvas element that we'll use to initialize the fabric canvas.
@@ -142,9 +155,7 @@ const Home = () => {
         // set the selected shape to the selected element
         selectedShapeRef.current = elem?.value as string;
         break;
-    }
-
-    selectedShapeRef.current = elem?.value as string;
+    };
   };
 
   useEffect(() => {
@@ -156,7 +167,7 @@ const Home = () => {
      * Event inspector: http://fabricjs.com/events
      * Event list: http://fabricjs.com/docs/fabric.Canvas.html#fire
      */
-    canvas.on("mouse:down", (options: any) => {
+    canvas.on("mouse:down", (options) => {
       handleCanvasMouseDown({
         options,
         canvas,
@@ -166,7 +177,7 @@ const Home = () => {
       });
     });
 
-    canvas.on("mouse:move", (options: any) => {
+    canvas.on("mouse:move", (options) => {
       handleCanvasMouseMove({
         options,
         canvas,
@@ -177,7 +188,7 @@ const Home = () => {
       });
     });
 
-    canvas.on("mouse:up", (options: any) => {
+    canvas.on("mouse:up", () => {
       handleCanvasMouseUp({
         canvas,
         isDrawing,
@@ -193,6 +204,12 @@ const Home = () => {
       handleCanvasObjectModified({
         options,
         syncShapeInStorage,
+      });
+    });
+
+    canvas?.on("object:moving", (options) => {
+      handleCanvasObjectMoving({
+        options,
       });
     });
 
@@ -218,13 +235,20 @@ const Home = () => {
       });
     });
 
+    canvas.on("mouse:wheel", (options) => {
+      handleCanvasZoom({
+        options,
+        canvas,
+      });
+    });
+
     window.addEventListener("resize", () => {
       handleResize({
         canvas: fabricRef.current,
       });
     });
 
-    window.addEventListener("keydown", (e: any) =>
+    window.addEventListener("keydown", (e) =>
       handleKeyDown({
         e,
         canvas: fabricRef.current,
@@ -238,8 +262,26 @@ const Home = () => {
     // dispose the canvas and remove the event listeners when the component unmounts
     return () => {
       canvas.dispose();
+
+      // remove the event listeners
+      window.removeEventListener("resize", () => {
+        handleResize({
+          canvas: null,
+        });
+      });
+
+      window.removeEventListener("keydown", (e) =>
+        handleKeyDown({
+          e,
+          canvas: fabricRef.current,
+          undo,
+          redo,
+          syncShapeInStorage,
+          deleteShapeFromStorage,
+        })
+      );
     };
-  }, []);
+  }, [canvasRef]); // run effect only once when the component mounts and the canvasRef changes
 
   // render the canvas when the canvasObjects from live storage changes
   useEffect(() => {
