@@ -7,8 +7,8 @@ import RightSidebar from "@/components/RightSidebar";
 import ScreenFitText from "@/components/ScreenFitText";
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
-import { handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasMouseMove, handleResize, initializeFabric, renderCanvas, handleCanvasObjectModified } from "@/lib/canvas";
-import { ActiveElement } from "@/types/type";
+import { handleCanvasMouseDown, handleCanvasMouseUp, handleCanvasMouseMove, handleResize, initializeFabric, renderCanvas, handleCanvasObjectModified, handleCanvasSelectionCreated, handleCanvasObjectScaling } from "@/lib/canvas";
+import { ActiveElement, Attributes } from "@/types/type";
 import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
 import { defaultNavElement } from "@/constants";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
@@ -62,6 +62,16 @@ export default function Page() {
     canvasObjects.delete(shapeId);
   }, []);
 
+  const [elementAttributes, setElementAttributes] = useState<Attributes>({
+    width: "",
+    height: "",
+    fontSize: "",
+    fontFamily: "",
+    fontWeight: "",
+    fill: "aabbcc",
+    stroke: "aabbcc"
+  });
+
   // canvasRef is a reference to the canvas element that we'll use to initialize the fabric canvas.
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -86,6 +96,7 @@ export default function Page() {
 
   const activeObjectRef = useRef<fabric.Object | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const isEditingRef = useRef(false);
 
   const [activeElement, setActiveElement] = useState<ActiveElement>({
     name: "",
@@ -188,6 +199,21 @@ export default function Page() {
       });
     });
 
+    canvas.on("object:scaling", (options) => {
+      handleCanvasObjectScaling({
+        options,
+        setElementAttributes,
+      });
+    });
+
+    canvas.on("selection:created", (options) => {
+      handleCanvasSelectionCreated({
+        options,
+        isEditingRef,
+        setElementAttributes,
+      });
+    });
+
     window.addEventListener("resize", () => {
       handleResize({
         canvas: fabricRef.current,
@@ -240,7 +266,14 @@ export default function Page() {
         <h1 className="sr-only text-white">Figman - a minimalist clone of Figma</h1>
         <LeftSidebar allShapes={Array.from(canvasObjects)} />
         <Live canvasRef={canvasRef} />
-        <RightSidebar />
+        <RightSidebar
+          elementAttributes={elementAttributes}
+          setElementAttributes={setElementAttributes}
+          fabricRef={fabricRef}
+          isEditingRef={isEditingRef}
+          activeObjectRef={activeObjectRef}
+          syncShapeinStorage={syncShapeInStorage}
+        />
       </section>
       <ScreenFitText />
     </main>
