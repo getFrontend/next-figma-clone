@@ -14,7 +14,7 @@ import { defaultNavElement } from "@/constants";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
 import { handleImageUpload } from "@/lib/shapes";
 
-export const Home = () => {
+const Home = () => {
   // useUndo and useRedo are hooks provided by Liveblocks that allow you to undo and redo mutations.
   const undo = useUndo();
   const redo = useRedo();
@@ -283,7 +283,7 @@ export const Home = () => {
           fabricRef={fabricRef}
           isEditingRef={isEditingRef}
           activeObjectRef={activeObjectRef}
-          syncShapeinStorage={syncShapeInStorage}
+          syncShapeInStorage={syncShapeInStorage}
         />
       </section>
       <ScreenFitText />
@@ -291,4 +291,4 @@ export const Home = () => {
   );
 };
 
-export default Home;
+export default Home; 
