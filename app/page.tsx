@@ -12,6 +12,7 @@ import { ActiveElement } from "@/types/type";
 import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
 import { defaultNavElement } from "@/constants";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
+import { handleImageUpload } from "@/lib/shapes";
 
 export default function Page() {
   // useUndo and useRedo are hooks provided by Liveblocks that allow you to undo and redo mutations.
@@ -84,6 +85,7 @@ export default function Page() {
   const selectedShapeRef = useRef<string | null>(null);
 
   const activeObjectRef = useRef<fabric.Object | null>(null);
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const [activeElement, setActiveElement] = useState<ActiveElement>({
     name: "",
@@ -105,12 +107,26 @@ export default function Page() {
         // set "select" as the active element
         setActiveElement(defaultNavElement);
         break;
+
+      // delete the selected shape from the canvas
       case "delete":
         // delete it from the canvas
         handleDelete(fabricRef.current as any, deleteShapeFromStorage);
         // set "select" as the active element
         setActiveElement(defaultNavElement);
         break;
+
+      // upload an image to the canvas
+      case "image":
+        imageInputRef.current?.click();
+        isDrawing.current = false;
+
+        if (fabricRef.current) {
+          // disable the drawing mode of canvas
+          fabricRef.current.isDrawingMode = false;
+        }
+        break;
+
     }
 
     selectedShapeRef.current = elem?.value as string;
@@ -202,6 +218,16 @@ export default function Page() {
       <Navbar
         activeElement={activeElement}
         handleActiveElement={handleActiveElement}
+        imageInputRef={imageInputRef}
+        handleImageUpload={(e: any) => {
+          e.stopPropagation();
+          handleImageUpload({
+            file: e.target.files[0],
+            canvas: fabricRef as any,
+            shapeRef,
+            syncShapeInStorage
+          });
+        }}
       />
       <section className="flex flex-row h-full">
         <h1 className="sr-only text-white">Figman - a minimalist clone of Figma</h1>
@@ -212,4 +238,4 @@ export default function Page() {
       <ScreenFitText />
     </main>
   );
-}
+};
