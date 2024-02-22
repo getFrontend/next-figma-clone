@@ -44,9 +44,26 @@ const RightSidebar = ({
         handleInputChange={handleInputChange}
         isEditingRef={isEditingRef}
       />
-      <Text />
-      <Color />
-      <Color />
+      <Text
+        fontFamily={elementAttributes.fontFamily}
+        fontSize={elementAttributes.fontSize}
+        fontWeight={elementAttributes.fontWeight}
+        handleInputChange={handleInputChange}
+      />
+      <Color
+        inputRef={colorInputRef}
+        attribute={elementAttributes.fill}
+        placeholder="color"
+        attributeType="fill"
+        handleInputChange={handleInputChange}
+      />
+      <Color
+        inputRef={strokeInputRef}
+        attribute={elementAttributes.stroke}
+        placeholder="stroke"
+        attributeType="stroke"
+        handleInputChange={handleInputChange}
+      />
       <Export />
     </section>
   )
