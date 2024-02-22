@@ -1,12 +1,11 @@
 "use client";
 
-import { ReactNode } from "react";
 import { RoomProvider } from "../liveblocks.config";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { LiveMap } from "@liveblocks/client";
 import Loader from "@/components/Loader";
 
-export function Room({ children }: { children: ReactNode }) {
+const Room = ({ children }: { children: React.ReactNode }) => {
   return (
     <RoomProvider id="my-room"
       initialPresence={{
@@ -24,3 +23,5 @@ export function Room({ children }: { children: ReactNode }) {
     </RoomProvider>
   );
 }
+
+export default Room;

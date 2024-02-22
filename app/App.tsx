@@ -1,9 +1,6 @@
 "use client";
 
-import LeftSidebar from "@/components/LeftSidebar";
-import Live from "@/components/Live";
-import Navbar from "@/components/Navbar";
-import RightSidebar from "@/components/RightSidebar";
+import { LeftSidebar, Live, Navbar, RightSidebar } from "@/components/index";
 import ScreenFitText from "@/components/ScreenFitText";
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
