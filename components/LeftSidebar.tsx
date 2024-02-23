@@ -9,7 +9,7 @@ const LeftSidebar = ({ allShapes }: { allShapes: Array<any> }) => {
   // memoize the result of this function so that it doesn't change on every render but only when there are new shapes
   const memoizedShapes = useMemo(
     () => (
-      <section className=" h-full sticky left-0 pb-20 flex flex-col select-none overflow-y-auto border-t border-primary-grey-200 bg-primary-black text-primary-grey-300 max-sm:hidden min-w-[227px]">
+      <section className=" h-full sticky left-0 pb-20 flex flex-col select-none overflow-y-auto border-t border-primary-grey-200 bg-primary-black text-primary-grey-300 max-lg:hidden min-w-[180px]">
         <h2 className="border border-primary-grey-200 px-5 py-4 text-xs uppercase">Layers</h2>
         <div className="flex flex-col">
           {allShapes?.map((shape: any) => {
