@@ -13,6 +13,7 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { shortcuts } from "@/constants";
+import { Comments } from "./comments/Comments";
 
 type Props = {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
@@ -187,7 +188,7 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
         break;
 
       case "Reload Page":
-        window.location.reload(); 
+        window.location.reload();
         break;
 
       case "Undo":
@@ -246,6 +247,9 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
 
         {/* Show the live cursors of other users */}
         <LiveCursors />
+
+        {/* Show the comments */}
+        <Comments />
       </ContextMenuTrigger>
 
       <ContextMenuContent className="right-menu-content">
