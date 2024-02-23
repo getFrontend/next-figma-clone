@@ -23,6 +23,7 @@ import { handleDelete, handleKeyDown } from "@/lib/key-events";
 import { handleImageUpload } from "@/lib/shapes";
 import { useMutation, useRedo, useStorage, useUndo } from "@/liveblocks.config";
 import { ActiveElement, Attributes } from "@/types/type";
+import Background from "@/components/Background";
 
 const Home = () => {
   // useUndo and useRedo are hooks provided by Liveblocks that allow you to undo and redo mutations.
@@ -318,6 +319,7 @@ const Home = () => {
             redo={redo}
           />
         <ScreenFitText />
+        <Background />
         </div>
         <RightSidebar
           elementAttributes={elementAttributes}
