@@ -82,6 +82,7 @@ export const fontFamilyOptions = [
   { value: "Times New Roman", label: "Times New Roman" },
   { value: "Comic Sans MS", label: "Comic Sans MS" },
   { value: "Brush Script MT", label: "Brush Script MT" },
+  { value: "Pacifico", label: "Pacifico" },
 ];
 
 export const fontSizeOptions = [
