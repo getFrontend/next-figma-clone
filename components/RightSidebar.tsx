@@ -37,7 +37,7 @@ const RightSidebar = ({
       <section className=" h-full sticky right-0 pb-20 flex flex-col select-none overflow-y-auto border-t border-primary-grey-200 bg-primary-black text-primary-grey-300 max-sm:hidden min-w-[227px]">
         <h2 className="border border-primary-grey-200 px-5 py-4 text-xs uppercase">Design</h2>
         <span className="text-xs text-primary-grey-300 px-5 py-4 border-b border-primary-grey-200">
-          Make any changes you want to the canvas
+          Make changes to the canvas size
         </span>
 
         <Dimensions
@@ -55,7 +55,7 @@ const RightSidebar = ({
         <Color
           inputRef={colorInputRef}
           attribute={elementAttributes.fill}
-          placeholder="color"
+          placeholder="color ( fill )"
           attributeType="fill"
           handleInputChange={handleInputChange}
         />
