@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "../ui/button";
 
 type Props = {
   setReaction: (reaction: string) => void;
@@ -26,12 +27,12 @@ type ReactionButtonProps = {
 };
 
 const ReactionButton = ({ reaction, onSelect }: ReactionButtonProps) => (
-  <button
-    className='transform select-none p-2 text-xl transition-transform hover:scale-150 focus:scale-150 focus:outline-none'
+  <Button
+    className='transform select-none p-2 text-xl transition-transform hover:scale-125 focus:scale-125 focus:outline-none'
     onPointerDown={() => onSelect(reaction)}
   >
     {reaction}
-  </button>
+  </Button>
 );
 
 export default ReactionSelector;
