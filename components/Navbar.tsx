@@ -8,6 +8,7 @@ import { NewThread } from "./comments/NewThread";
 import ActiveUsers from "./users/ActiveUsers";
 import Image from "next/image";
 import ShapesMenu from "./ShapesMenu";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveElement }: NavbarProps) => {
   const isActive = (value: string | Array<ActiveElement>) =>
@@ -20,48 +21,56 @@ const Navbar = ({ activeElement, imageInputRef, handleImageUpload, handleActiveE
 
       <ul className="flex flex-row">
         {navElements.map((item: ActiveElement | any) => (
-          <li
+          <Tooltip
             key={item.name}
-            onClick={() => {
-              if (Array.isArray(item.value)) return;
-              handleActiveElement(item);
-            }}
-            className={`group px-2.5 py-5 flex justify-center items-center
+          >
+            <TooltipTrigger>
+              <li
+                onClick={() => {
+                  if (Array.isArray(item.value)) return;
+                  handleActiveElement(item);
+                }}
+                className={`group px-2.5 py-5 flex justify-center items-center
             ${isActive(item.value) ? "bg-primary-green" : "hover:bg-primary-grey-200"}
             `}
-          >
-            {/* If value is an array means it's a nav element with sub options i.e., dropdown */}
-            {Array.isArray(item.value) ? (
-              <ShapesMenu
-                item={item}
-                activeElement={activeElement}
-                imageInputRef={imageInputRef}
-                handleActiveElement={handleActiveElement}
-                handleImageUpload={handleImageUpload}
-              />
-            ) : item?.value === "comments" ? (
-              // If value is comments, trigger the NewThread component
-              <NewThread>
-                <Button className="relative w-5 h-5 object-contain">
-                  <Image
-                    src={item.icon}
-                    alt={item.name}
-                    fill
-                    className={isActive(item.value) ? "invert" : ""}
+              >
+                {/* If value is an array means it's a nav element with sub options i.e., dropdown */}
+                {Array.isArray(item.value) ? (
+                  <ShapesMenu
+                    item={item}
+                    activeElement={activeElement}
+                    imageInputRef={imageInputRef}
+                    handleActiveElement={handleActiveElement}
+                    handleImageUpload={handleImageUpload}
                   />
-                </Button>
-              </NewThread>
-            ) : (
-              <Button className="relative w-5 h-5 object-contain">
-                <Image
-                  src={item.icon}
-                  alt={item.name}
-                  fill
-                  className={isActive(item.value) ? "invert" : ""}
-                />
-              </Button>
-            )}
-          </li>
+                ) : item?.value === "comments" ? (
+                  // If value is comments, trigger the NewThread component
+                  <NewThread>
+                    <Button className="relative w-5 h-5 object-contain">
+                      <Image
+                        src={item.icon}
+                        alt={item.name}
+                        fill
+                        className={isActive(item.value) ? "invert" : ""}
+                      />
+                    </Button>
+                  </NewThread>
+                ) : (
+                  <Button className="relative w-5 h-5 object-contain">
+                    <Image
+                      src={item.icon}
+                      alt={item.name}
+                      fill
+                      className={isActive(item.value) ? "invert" : ""}
+                    />
+                  </Button>
+                )}
+              </li>
+            </TooltipTrigger>
+            <TooltipContent className="border-none bg-primary-grey-200 px-4 py-2 text-xs">
+              {item.name}
+            </TooltipContent>
+          </Tooltip>
         ))}
       </ul>
 
