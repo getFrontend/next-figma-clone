@@ -7,7 +7,7 @@ import Loader from "@/components/Loader";
 
 const Room = ({ children }: { children: React.ReactNode }) => {
   return (
-    <RoomProvider id="my-room"
+    <RoomProvider id="figman-room"
       initialPresence={{
         cursor: null,
         cursorColor: null,

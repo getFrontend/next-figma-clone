@@ -186,6 +186,10 @@ const Live = ({ canvasRef, undo, redo }: Props) => {
         setCursorState({ mode: CursorMode.ReactionSelector });
         break;
 
+      case "Reload Page":
+        window.location.reload(); 
+        break;
+
       case "Undo":
         undo();
         break;

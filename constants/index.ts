@@ -229,4 +229,9 @@ export const shortcuts = [
     name: "Reactions",
     shortcut: "E",
   },
+  {
+    key: "5",
+    name: "Reload Page",
+    shortcut: "⌘ + R",
+  }
 ];

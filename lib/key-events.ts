@@ -38,8 +38,8 @@ export const handlePaste = (
             enlivenedObjects.forEach((enlivenedObj) => {
               // Offset the pasted objects to avoid overlap with existing objects
               enlivenedObj.set({
-                left: enlivenedObj.left || 0 + 20,
-                top: enlivenedObj.top || 0 + 20,
+                left: (enlivenedObj.left || 0) + 20,
+                top: (enlivenedObj.top || 0) + 20,
                 objectId: uuidv4(),
                 fill: "#aabbcc",
               } as CustomFabricObject<any>);

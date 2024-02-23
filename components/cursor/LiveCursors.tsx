@@ -7,7 +7,6 @@ const LiveCursors = () => {
   // useOthers returns the list of other users in the room.
   const others = useOthers();
 
-
   return others.map(({ connectionId, presence }) => {
     if (presence == null || !presence?.cursor) {
       return null;
