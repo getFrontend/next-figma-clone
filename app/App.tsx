@@ -311,11 +311,14 @@ const Home = () => {
       <section className="flex flex-row h-full">
         <h1 className="sr-only text-white">Figman - a minimalist clone of Figma</h1>
         <LeftSidebar allShapes={Array.from(canvasObjects)} />
-        <Live
-          canvasRef={canvasRef}
-          undo={undo}
-          redo={redo}
-        />
+        <div className="relative w-full h-full">
+          <Live
+            canvasRef={canvasRef}
+            undo={undo}
+            redo={redo}
+          />
+        <ScreenFitText />
+        </div>
         <RightSidebar
           elementAttributes={elementAttributes}
           setElementAttributes={setElementAttributes}
@@ -325,7 +328,6 @@ const Home = () => {
           syncShapeInStorage={syncShapeInStorage}
         />
       </section>
-      <ScreenFitText />
     </main>
   );
 };

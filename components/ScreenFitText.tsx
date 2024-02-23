@@ -44,11 +44,11 @@ const ScreenFitText = () => {
 
   return (
     <div
-      className="z-0 flex h-screen w-full items-center overflow-hidden"
+      className="flex h-full w-full items-center overflow-hidden"
       ref={containerRef}
     >
       <span
-        className="absolute bottom-0 left-0 mx-auto whitespace-nowrap text-center font-bold uppercase text-slate-700 opacity-10 pointer-events-none"
+        className="z-[-1] absolute top-0 left-0 mx-auto whitespace-nowrap text-center font-bold uppercase text-slate-700 opacity-10 pointer-events-none"
         ref={textRef}
       >
         FIGMAN CREATE & SHARE
