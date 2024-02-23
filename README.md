@@ -6,6 +6,8 @@ This project is realized thanks to the **JavaScript Mastery** 🚀 tutorial and 
 
 In the course of the project it was possible to consolidate the skills of real practical tasks, work with code documentation.
 
+![](https://github.com/getFrontend/next-figma-clone/blob/main/public/figman-1.png?raw=true)
+
 ## Tech Stack
 
 ⚙️ Next.js 14
@@ -24,11 +26,17 @@ In the course of the project it was possible to consolidate the skills of real p
 
 ✅ **Multi Cursors, Cursor Chat, and Reactions**: Allows multiple users to collaborate simultaneously by showing individual cursors, enabling real-time chat, and reactions for interactive communication.
 
+![](https://github.com/getFrontend/next-figma-clone/blob/main/public/figman-3.png?raw=true)
+
 ✅ **Active Users**: Displays a list of currently active users in the collaborative environment, providing visibility into who is currently engaged.
 
 ✅ **Comment Bubbles**: Enables users to attach comments to specific elements on the canvas, fostering communication and feedback on design components.
 
+![](https://github.com/getFrontend/next-figma-clone/blob/main/public/figman-5.png?raw=true)
+
 ✅ **Creating Different Shapes**: Provides tools for users to generate a variety of shapes on the canvas, allowing for diverse design elements
+
+![](https://github.com/getFrontend/next-figma-clone/blob/main/public/figman-4.png?raw=true)
 
 ✅ **Uploading Images**: Import images onto the canvas, expanding the range of visual content in the design
 
@@ -37,6 +45,8 @@ In the course of the project it was possible to consolidate the skills of real p
 ✅ **Freeform Drawing**: Enables users to draw freely on the canvas, promoting artistic expression and creative design.
 
 ✅ **Undo/Redo**: Provides the ability to reverse (undo) or restore (redo) previous actions, offering flexibility in design decision-making
+
+![](https://github.com/getFrontend/next-figma-clone/blob/main/public/figman-2.png?raw=true)
 
 ✅ **Keyboard Actions**: Allows users to utilize keyboard shortcuts for various actions, including copying, pasting, deleting, and triggering shortcuts for features like opening cursor chat, reactions, and more, enhancing efficiency and accessibility.
 
