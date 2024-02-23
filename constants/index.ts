@@ -141,6 +141,38 @@ export const fontSizeOptions = [
     value: "36",
     label: "36",
   },
+  {
+    value: "42",
+    label: "42",
+  },
+  {
+    value: "48",
+    label: "48",
+  },
+  {
+    value: "54",
+    label: "54",
+  },
+  {
+    value: "60",
+    label: "60",
+  },
+  {
+    value: "66",
+    label: "66",
+  },
+  {
+    value: "72",
+    label: "72",
+  },
+  {
+    value: "82",
+    label: "82",
+  },
+  {
+    value: "92",
+    label: "92",
+  },
 ];
 
 export const fontWeightOptions = [
