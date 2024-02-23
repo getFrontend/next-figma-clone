@@ -15,6 +15,8 @@ export const createRectangle = (pointer: PointerEvent) => {
     width: 100,
     height: 100,
     fill: "#aabbcc",
+    stroke: "#777777",
+    strokeWidth: 2,
     objectId: uuidv4(),
   } as CustomFabricObject<fabric.Rect>);
 
@@ -28,16 +30,20 @@ export const createTriangle = (pointer: PointerEvent) => {
     width: 100,
     height: 100,
     fill: "#aabbcc",
+    stroke: "#777777",
+    strokeWidth: 2,
     objectId: uuidv4(),
   } as CustomFabricObject<fabric.Triangle>);
 };
 
 export const createCircle = (pointer: PointerEvent) => {
   return new fabric.Circle({
-    left: pointer.x,
-    top: pointer.y,
-    radius: 100,
+    left: pointer.x - 50,
+    top: pointer.y - 50,
+    radius: 50,
     fill: "#aabbcc",
+    stroke: "#777777",
+    strokeWidth: 2,
     objectId: uuidv4(),
   } as any);
 };
@@ -83,7 +89,7 @@ export const createSpecificShape = (
       return createLine(pointer);
 
     case "text":
-      return createText(pointer, "Tap to Type");
+      return createText(pointer, "Your Text Here");
 
     default:
       return null;
@@ -145,7 +151,7 @@ export const modifyShape = ({
   // if  property is width or height, set the scale of the selected element
   if (property === "width") {
     selectedElement.set("scaleX", 1);
-    selectedElement.set("width", value);  
+    selectedElement.set("width", value);
   } else if (property === "height") {
     selectedElement.set("scaleY", 1);
     selectedElement.set("height", value);
